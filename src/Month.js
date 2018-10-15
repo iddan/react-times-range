@@ -25,12 +25,19 @@ class Day extends Component {
   };
 
   render() {
-    const { index, selected } = this.props;
+    const { index, selectedStart, selectedEnd, inRange } = this.props;
     return (
       <Ripple unbounded primary>
         <Typography
           use="body1"
-          className={["day", selected && "selected"].filter(Boolean).join(" ")}
+          className={[
+            "day",
+            selectedStart && "selected-start",
+            selectedEnd && "selected-end",
+            inRange && "in-range"
+          ]
+            .filter(Boolean)
+            .join(" ")}
           onClick={this.handleClick}
         >
           {index + 1}
@@ -52,24 +59,37 @@ export default class Month extends Component {
   };
 
   render() {
-    const { index, year, onDayClick, selected } = this.props;
+    const { index, year, startDate, endDate } = this.props;
     const name = getMonthName(index);
     const days = getDaysInMonth(year, index);
     const firstDayWeekOffset = getFirstDayInTheWeekOfMonth(year, index + 1);
+    const sdd =
+      startDate &&
+      new Date(startDate.year, startDate.month + 1, startDate.day + 1);
+    const edd =
+      endDate && new Date(endDate.year, endDate.month + 1, endDate.day + 1);
 
     const dayNodes = Array(days)
       .fill(1)
       .map((_, index) => {
+        const ddd = new Date(this.props.year, this.props.index + 1, index + 1);
         return (
           <Day
             key={index}
             index={index}
             onClick={this.handleDayClick}
-            selected={
-              selected &&
-              index === selected.day &&
-              this.props.index === selected.month &&
-              this.props.year === selected.year
+            inRange={sdd && edd && sdd < ddd && ddd < edd}
+            selectedStart={
+              startDate &&
+              index === startDate.day &&
+              this.props.index === startDate.month &&
+              this.props.year === startDate.year
+            }
+            selectedEnd={
+              endDate &&
+              index === endDate.day &&
+              this.props.index === endDate.month &&
+              this.props.year === endDate.year
             }
           />
         );

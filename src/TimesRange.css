@@ -172,9 +172,25 @@
   cursor: pointer;
 }
 
-.TimeRange .day.selected {
+.TimeRange .day.selected-start,
+.TimeRange .day.selected-end {
   background: var(--mdc-theme-primary);
   color: var(--mdc-theme-on-primary);
+}
+
+.TimeRange .day.selected-start {
+  margin-right: 0;
+}
+
+.TimeRange .day.selected-end {
+  margin-left: 0;
+}
+
+.TimeRange .day.in-range {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  margin: 2px 0;
+  padding: 8px 12px;
 }
 
 .TimeRange .Calendar .footer {

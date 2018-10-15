@@ -64,12 +64,13 @@ export default class TimesRange extends Component {
       const date = new Date(day.year, day.month, day.day);
 
       /** @todo copy logic from Google */
-      if (startDate === null || (endDateDate !== null && date < endDateDate)) {
+      if (startDate === null) {
         return { startDate: day };
       }
-      if (endDateDate === null || date > endDateDate) {
+      if (endDateDate === null) {
         return { endDate: day };
       }
+      return { startDate: day, endDate: null };
     });
   };
 
@@ -177,7 +178,8 @@ export default class TimesRange extends Component {
                   index={month.index}
                   year={month.year}
                   onDayClick={this.handleDayClick}
-                  selected={this.state.startDate}
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
                 />
               ))}
             </div>
