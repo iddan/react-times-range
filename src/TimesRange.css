@@ -12,9 +12,10 @@
   -webkit-box-shadow: 0 0 0 0;
 }
 
+/** @todo animate on the JS side for flex */
 .TimeRange.open {
   width: 716px;
-  height: 400px;
+  height: 430px;
   transition: box-shadow 0.25s, width 0.35s, height 0.25s;
 }
 
