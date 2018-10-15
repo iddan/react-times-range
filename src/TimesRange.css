@@ -1,0 +1,175 @@
+.TimeRange {
+  height: 56px;
+  width: 422px;
+  display: inline-flex;
+  flex-direction: column;
+  transition: box-shadow 0.15s, width 0.25s, height 0.15s;
+  position: relative;
+}
+
+.TimeRange:not(.open) {
+  box-shadow: 0 0 0 0;
+  -webkit-box-shadow: 0 0 0 0;
+}
+
+.TimeRange.open {
+  width: 600px;
+  height: 400px;
+  transition: box-shadow 0.25s, width 0.35s, height 0.25s;
+}
+
+.TimeRange .inputs {
+  display: inline-flex;
+  position: relative;
+}
+
+.TimeRange .inputs .mdc-text-field {
+  flex-shrink: 0;
+}
+
+.TimeRange .mdc-text-field__input {
+  padding-top: 6px;
+}
+
+.TimeRange .field-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  display: inline-block;
+  z-index: 2;
+  top: calc((56px - 32px) / 2);
+  left: 231px;
+  pointer-events: none;
+}
+
+.TimeRange:not(.open) .reset {
+  display: none;
+}
+
+.TimeRange .reset {
+  align-self: center;
+}
+
+.TimeRange .Calendar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 12px 38px 8px;
+}
+
+.TimeRange .Calendar,
+.TimeRange .reset {
+  opacity: 0;
+  pointer-events: none;
+  max-width: 0;
+  max-height: 0;
+}
+
+.TimeRange.open .Calendar,
+.TimeRange.open .reset {
+  opacity: 1;
+  pointer-events: unset;
+  transition: opacity 0.15s;
+  transition-delay: 0.15s;
+  max-width: unset;
+  max-height: unset;
+}
+
+.TimeRange .Calendar .months {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.TimeRange .Month {
+  width: calc(50% - 35px);
+  text-align: center;
+  margin: 0 2px 0 2px;
+}
+
+.TimeRange .Month .name {
+  margin: 8px 0;
+  display: inline-block;
+}
+
+.TimeRange .Month .weekday-labels {
+  display: flex;
+  flex-direction: row;
+}
+
+.TimeRange .Month .weekday-label {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: small;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 36px;
+  margin: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 14px;
+  text-align: center;
+  flex: 1;
+}
+
+.TimeRange .week {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.Month .week.first {
+  justify-content: flex-end;
+}
+
+.TimeRange .day {
+  width: 1em;
+  height: 1em;
+  padding: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  transition: background-color 0.1s;
+}
+
+.TimeRange .day:hover {
+  /** @todo use variable */
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.TimeRange .day.selected {
+  /** @todo use variable */
+  background: blue;
+  color: white;
+}
+
+.TimeRange .Calendar .footer {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid grey;
+}
+
+.TimeRange .done {
+  margin: 8px;
+  margin-left: auto;
+}
+
+.TimeRange .flipper {
+  width: 30px;
+  height: 30px;
+  /** @todo use theme */
+  background-color: #fff;
+  border-radius: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+}
+
+.TimeRange .flipper:nth-of-type(1) {
+  left: 0;
+}
+
+.TimeRange .flipper:nth-of-type(2) {
+  right: 0;
+}
