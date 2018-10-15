@@ -8,7 +8,7 @@
 ### Development
 
 ```bash
-git clone http://github.com/iddan/react-times-range;
+git clone git@github.com:iddan/react-times-range.git;
 yarn install;
 yarn run catalog-start;
 open http://localhost:4000;
