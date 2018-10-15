@@ -15,7 +15,7 @@
 /** @todo animate on the JS side for flex */
 .TimeRange.open {
   width: 716px;
-  height: 430px;
+  height: 455px;
   transition: box-shadow 0.25s, width 0.35s, height 0.25s;
 }
 
