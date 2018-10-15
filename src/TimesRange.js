@@ -4,6 +4,7 @@ import { TextField } from "@rmwc/textfield";
 import { Button } from "@rmwc/button";
 import { Typography } from "@rmwc/typography";
 import { Elevation } from "@rmwc/elevation";
+import { Icon } from "@rmwc/icon";
 import "@rmwc/icon/icon.css";
 import "@material/textfield/dist/mdc.textfield.css";
 import "@material/line-ripple/dist/mdc.line-ripple.css";
@@ -262,11 +263,20 @@ export default class TimesRange extends Component {
               />
             ))}
           </div>
-          <Elevation z={3} className="flipper" onClick={this.forwardMonth}>
-            {">"}
+          {/** @todo RTL support */}
+          <Elevation
+            z={3}
+            className="flipper forwards"
+            onClick={this.forwardMonth}
+          >
+            <Icon use="keyboard_arrow_right" />
           </Elevation>
-          <Elevation z={3} className="flipper" onClick={this.backwardMonth}>
-            {"<"}
+          <Elevation
+            z={3}
+            className="flipper backwards"
+            onClick={this.backwardMonth}
+          >
+            <Icon use="keyboard_arrow_left" />
           </Elevation>
           <div className="footer">
             <Button className="done" raised onClick={this.close}>

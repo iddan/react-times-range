@@ -13,7 +13,7 @@
 }
 
 .TimeRange.open {
-  width: 600px;
+  width: 650px;
   height: 400px;
   transition: box-shadow 0.25s, width 0.35s, height 0.25s;
 }
@@ -114,6 +114,7 @@
 }
 
 .TimeRange .week {
+  width: calc((1em + 16px + 4px) * 7);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -129,7 +130,10 @@
   padding: 8px;
   display: inline-block;
   border-radius: 50%;
+  line-height: 1.1em;
   transition: background-color 0.1s;
+  margin: 2px;
+  flex-shrink: 0;
 }
 
 .TimeRange .day:hover {
@@ -166,10 +170,12 @@
   top: 50%;
 }
 
-.TimeRange .flipper:nth-of-type(1) {
+.TimeRange .flipper.backwards {
   left: 0;
+  transform: translateX(-50%) translateY(-50%);
 }
 
-.TimeRange .flipper:nth-of-type(2) {
+.TimeRange .flipper.forwards {
   right: 0;
+  transform: translateX(50%) translateY(-50%);
 }
