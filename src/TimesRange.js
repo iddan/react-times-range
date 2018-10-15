@@ -1,11 +1,11 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import { Card } from "@rmwc/card";
 import { TextField } from "@rmwc/textfield";
 import { Button } from "@rmwc/button";
-import { Typography } from "@rmwc/typography";
 import { Elevation } from "@rmwc/elevation";
 import { Ripple } from "@rmwc/ripple";
 import { Icon } from "@rmwc/icon";
+import Month from "./Month";
 import "@rmwc/icon/icon.css";
 import "@material/textfield/dist/mdc.textfield.css";
 import "@material/line-ripple/dist/mdc.line-ripple.css";
@@ -16,119 +16,12 @@ import "@material/elevation/dist/mdc.elevation.css";
 import "@material/ripple/dist/mdc.ripple.css";
 import "@material/theme/dist/mdc.theme.css";
 import "./TimesRange.css";
-import {
-  getMonthName,
-  getFirstDayInTheWeekOfMonth,
-  getDaysInMonth
-} from "./util";
 
 /**
  * @todo
  * make body positioned absolutely so it won't hurt flow
  * add time pickers
  */
-
-const daysOfTheWeek = ["S", "M", "T", "W", "T", "F", "S"];
-
-const last = array => array[array.length - 1];
-// const dayOfTheWeek = (firstDayWeekOffset + index) % daysOfTheWeek.length;
-
-class Day extends Component {
-  handleClick = () => {
-    this.props.onClick(this.props.index);
-  };
-
-  render() {
-    const { index, selected } = this.props;
-    return (
-      <Ripple unbounded primary>
-        <Typography
-          use="body1"
-          className={["day", selected && "selected"].filter(Boolean).join(" ")}
-          onClick={this.handleClick}
-        >
-          {index + 1}
-        </Typography>
-      </Ripple>
-    );
-  }
-}
-
-class Month extends Component {
-  props: { year: number, index: number };
-
-  handleDayClick = day => {
-    this.props.onDayClick({
-      day,
-      month: this.props.index,
-      year: this.props.year
-    });
-  };
-
-  render() {
-    const { index, year, onDayClick, selected } = this.props;
-    const name = getMonthName(index);
-    const days = getDaysInMonth(year, index);
-    const firstDayWeekOffset = getFirstDayInTheWeekOfMonth(year, index + 1);
-
-    const dayNodes = Array(days)
-      .fill(1)
-      .map((_, index) => {
-        return (
-          <Day
-            key={index}
-            index={index}
-            onClick={this.handleDayClick}
-            selected={
-              selected &&
-              index === selected.day &&
-              this.props.index === selected.month &&
-              this.props.year === selected.year
-            }
-          />
-        );
-      });
-
-    const dayNodesByWeek = dayNodes.reduce((byWeek, node) => {
-      if (
-        byWeek.length === 0 ||
-        (byWeek.length === 1 &&
-          last(byWeek).length === daysOfTheWeek.length - firstDayWeekOffset) ||
-        last(byWeek).length === daysOfTheWeek.length
-      ) {
-        byWeek.push([]);
-      }
-      const week = last(byWeek);
-      week.push(node);
-      return byWeek;
-    }, []);
-
-    return (
-      <div className="Month">
-        <Typography className="name" use="body1">
-          {name}
-        </Typography>
-        <div className="weekday-labels">
-          {daysOfTheWeek.map((day, index) => (
-            <Typography key={index} className="weekday-label" use="body1">
-              {day}
-            </Typography>
-          ))}
-        </div>
-        {dayNodesByWeek.map((dayNodes, index) => (
-          <div
-            key={index}
-            className={["week", index === 0 && "first"]
-              .filter(Boolean)
-              .join(" ")}
-          >
-            {dayNodes}
-          </div>
-        ))}
-      </div>
-    );
-  }
-}
 
 export default class TimesRange extends Component {
   state = {
