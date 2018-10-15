@@ -171,6 +171,7 @@
   position: absolute;
   top: 50%;
   cursor: pointer;
+  user-select: none;
 }
 
 .TimeRange .flipper.backwards {
