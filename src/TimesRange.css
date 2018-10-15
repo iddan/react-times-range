@@ -77,17 +77,50 @@
 }
 
 .TimeRange .Calendar .months {
+  overflow: hidden;
   flex: 1;
+}
+
+.TimeRange .Calendar .months__inner {
+  width: 200%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 12px 38px 0;
+  padding: 12px 38px 0;
+  box-sizing: border-box;
+  transform: translateX(-25%);
+}
+
+@keyframes moving-backwards {
+  from {
+    transform: translateX(-25%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.months.moving-backwards .months__inner {
+  animation: moving-backwards 0.2s forwards;
+}
+
+@keyframes moving-forwards {
+  from {
+    transform: translateX(-25%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.months.moving-forwards .months__inner {
+  animation: moving-forwards 0.2s forwards;
 }
 
 .TimeRange .Month {
-  width: calc(50% - 35px);
   text-align: center;
-  margin: 0 2px 0 2px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .TimeRange .Month .name {

@@ -28,7 +28,9 @@ export default class TimesRange extends Component {
     open: false,
     displayedMonths: [
       { index: 0, year: new Date().getFullYear() },
-      { index: 1, year: new Date().getFullYear() }
+      { index: 1, year: new Date().getFullYear() },
+      { index: 2, year: new Date().getFullYear() },
+      { index: 3, year: new Date().getFullYear() }
     ],
     startDate: null,
     endDate: null
@@ -76,24 +78,32 @@ export default class TimesRange extends Component {
   };
 
   backwardMonth = () => {
-    /**
-     * @todo dont assume 12 months a year
-     */
-    this.setState(prevState => ({
-      displayedMonths: prevState.displayedMonths.map(month => ({
-        index: month.index === 0 ? 11 : month.index - 1,
-        year: month.index === 0 ? month.year - 1 : month.year
-      }))
-    }));
+    this.setState({ movingBackwards: true });
+    setTimeout(() => {
+      /**
+       * @todo dont assume 12 months a year
+       */
+      this.setState(prevState => ({
+        displayedMonths: prevState.displayedMonths.map(month => ({
+          index: month.index === 0 ? 11 : month.index - 1,
+          year: month.index === 0 ? month.year - 1 : month.year
+        })),
+        movingBackwards: false
+      }));
+    }, 200);
   };
 
   forwardMonth = () => {
-    this.setState(prevState => ({
-      displayedMonths: prevState.displayedMonths.map(month => ({
-        index: month.index === 11 ? 0 : month.index + 1,
-        year: month.index === 11 ? month.year + 1 : month.year
-      }))
-    }));
+    this.setState({ movingForwards: true });
+    setTimeout(() => {
+      this.setState(prevState => ({
+        displayedMonths: prevState.displayedMonths.map(month => ({
+          index: month.index === 11 ? 0 : month.index + 1,
+          year: month.index === 11 ? month.year + 1 : month.year
+        })),
+        movingForwards: false
+      }));
+    }, 200);
   };
 
   reset = () => {
@@ -150,17 +160,27 @@ export default class TimesRange extends Component {
           </Button>
         </div>
         <div className="Calendar">
-          <div className="months">
-            {/** @todo render to months in advance and swipe */}
-            {this.state.displayedMonths.map(month => (
-              <Month
-                key={month.index}
-                index={month.index}
-                year={month.year}
-                onDayClick={this.handleDayClick}
-                selected={this.state.startDate}
-              />
-            ))}
+          <div
+            className={[
+              "months",
+              this.state.movingBackwards && "moving-backwards",
+              this.state.movingForwards && "moving-forwards"
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <div className="months__inner">
+              {/** @todo render to months in advance and swipe */}
+              {this.state.displayedMonths.map(month => (
+                <Month
+                  key={month.index}
+                  index={month.index}
+                  year={month.year}
+                  onDayClick={this.handleDayClick}
+                  selected={this.state.startDate}
+                />
+              ))}
+            </div>
           </div>
           {/** @todo RTL support */}
           <Ripple>
