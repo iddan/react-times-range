@@ -224,24 +224,26 @@ export default class TimesRange extends Component {
             withLeadingIcon="date_range"
             value={
               /** @todo make this date time string */
-              this.state.startDate &&
-              new Date(
-                this.state.startDate.year,
-                this.state.startDate.month,
-                this.state.startDate.day
-              ).toLocaleDateString()
+              this.state.startDate
+                ? new Date(
+                    this.state.startDate.year,
+                    this.state.startDate.month,
+                    this.state.startDate.day
+                  ).toLocaleDateString()
+                : ""
             }
           />
           <div className="field-divider" />
           <TextField
             value={
               /** @todo make this date time string */
-              this.state.endDate &&
-              new Date(
-                this.state.endDate.year,
-                this.state.endDate.month,
-                this.state.endDate.day
-              ).toLocaleDateString()
+              this.state.endDate
+                ? new Date(
+                    this.state.endDate.year,
+                    this.state.endDate.month,
+                    this.state.endDate.day
+                  ).toLocaleDateString()
+                : ""
             }
           />
           <Button
