@@ -4,6 +4,7 @@ import { TextField } from "@rmwc/textfield";
 import { Button } from "@rmwc/button";
 import { Typography } from "@rmwc/typography";
 import { Elevation } from "@rmwc/elevation";
+import { Ripple } from "@rmwc/ripple";
 import { Icon } from "@rmwc/icon";
 import "@rmwc/icon/icon.css";
 import "@material/textfield/dist/mdc.textfield.css";
@@ -12,6 +13,7 @@ import "@material/card/dist/mdc.card.css";
 import "@material/button/dist/mdc.button.css";
 import "@material/typography/dist/mdc.typography.css";
 import "@material/elevation/dist/mdc.elevation.css";
+import "@material/ripple/dist/mdc.ripple.css";
 import "./TimesRange.css";
 import {
   getMonthName,
@@ -264,20 +266,24 @@ export default class TimesRange extends Component {
             ))}
           </div>
           {/** @todo RTL support */}
-          <Elevation
-            z={3}
-            className="flipper forwards"
-            onClick={this.forwardMonth}
-          >
-            <Icon use="keyboard_arrow_right" />
-          </Elevation>
-          <Elevation
-            z={3}
-            className="flipper backwards"
-            onClick={this.backwardMonth}
-          >
-            <Icon use="keyboard_arrow_left" />
-          </Elevation>
+          <Ripple>
+            <Elevation
+              z={3}
+              className="flipper forwards"
+              onClick={this.forwardMonth}
+            >
+              <Icon use="keyboard_arrow_right" />
+            </Elevation>
+          </Ripple>
+          <Ripple>
+            <Elevation
+              z={3}
+              className="flipper backwards"
+              onClick={this.backwardMonth}
+            >
+              <Icon use="keyboard_arrow_left" />
+            </Elevation>
+          </Ripple>
           <div className="footer">
             <Button className="done" raised onClick={this.close}>
               done

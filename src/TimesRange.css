@@ -165,9 +165,12 @@
   /** @todo use theme */
   background-color: #fff;
   border-radius: 100%;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 50%;
+  cursor: pointer;
 }
 
 .TimeRange .flipper.backwards {
