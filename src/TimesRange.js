@@ -14,6 +14,7 @@ import "@material/button/dist/mdc.button.css";
 import "@material/typography/dist/mdc.typography.css";
 import "@material/elevation/dist/mdc.elevation.css";
 import "@material/ripple/dist/mdc.ripple.css";
+import "@material/theme/dist/mdc.theme.css";
 import "./TimesRange.css";
 import {
   getMonthName,
@@ -23,7 +24,6 @@ import {
 
 /**
  * @todo
- * style flippers
  * make body positioned absolutely so it won't hurt flow
  * add time pickers
  */
@@ -41,13 +41,15 @@ class Day extends Component {
   render() {
     const { index, selected } = this.props;
     return (
-      <Typography
-        use="body1"
-        className={["day", selected && "selected"].filter(Boolean).join(" ")}
-        onClick={this.handleClick}
-      >
-        {index + 1}
-      </Typography>
+      <Ripple unbounded primary>
+        <Typography
+          use="body1"
+          className={["day", selected && "selected"].filter(Boolean).join(" ")}
+          onClick={this.handleClick}
+        >
+          {index + 1}
+        </Typography>
+      </Ripple>
     );
   }
 }
