@@ -1,5 +1,20 @@
 # React Times Range
 
+_WIP - help is welcome!_
+
+### Features
+
+- Includes date and time pickers
+- Material Design
+- Supports Theming
+- Supports locallization
+- Works with native JS Date
+
+#### size
+
+- ~328K including RMWC (less than react-dates)
+- ~10K excluding RMWC
+
 ### Roadmap
 
 - Fully working date range component which look and feel similar to the one on [Google Flights](https://flights.google.com)
