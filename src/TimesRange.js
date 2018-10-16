@@ -84,26 +84,6 @@ export default class TimesRange extends Component {
     })
   };
 
-  // handleDayClick = day => {
-  //   this.setState(prevState => {
-  //     const { startDate, endDate } = prevState;
-  //     const endDateDate =
-  //       endDate === null
-  //         ? null
-  //         : new Date(endDate.year, endDate.month, endDate.day);
-  //     const date = new Date(day.year, day.month, day.day);
-      
-  //     /** @todo copy logic from Google */
-  //     if (startDate === null) {
-  //       return { startDate: day };
-  //     }
-  //     if (endDateDate === null) {
-  //       return { endDate: day };
-  //     }
-  //     return { startDate: day, endDate: null };
-  //   });
-  // };
-
   close = () => {
     this.setState({ open: false });
   };
