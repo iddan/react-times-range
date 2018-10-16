@@ -16,6 +16,7 @@ import "@material/elevation/dist/mdc.elevation.css";
 import "@material/ripple/dist/mdc.ripple.css";
 import "@material/theme/dist/mdc.theme.css";
 import "./TimesRange.css";
+import { getDate } from './utils/date'
 
 /**
  * @todo
@@ -53,26 +54,55 @@ export default class TimesRange extends Component {
       this.setState({ open: true });
     }
   };
-
   handleDayClick = day => {
     this.setState(prevState => {
       const { startDate, endDate } = prevState;
-      const endDateDate =
-        endDate === null
-          ? null
-          : new Date(endDate.year, endDate.month, endDate.day);
-      const date = new Date(day.year, day.month, day.day);
-
-      /** @todo copy logic from Google */
-      if (startDate === null) {
-        return { startDate: day };
+      if(!startDate && !endDate) {
+        return { startDate: day }
+      } 
+      else if(!endDate && +getDate(day) > +getDate(prevState.startDate)) {
+        return { endDate: day }
+      } 
+      else if(!endDate && +getDate(day) < +getDate(prevState.startDate)) {
+        return { startDate: day, endDate: prevState.startDate }
+      } 
+      else if(+getDate(day) < +getDate(prevState.startDate) && +getDate(day) < +getDate(prevState.endDate) ){
+        return {startDate: day}
       }
-      if (endDateDate === null) {
-        return { endDate: day };
+      else if (+getDate(day) < +getDate(prevState.startDate)) {
+        return { startDate: day}
+      } 
+      else if (+getDate(day) > +getDate(prevState.startDate) && +getDate(day) > +getDate(prevState.startDate)) {
+        return { endDate: day}
+      } 
+      else if (+getDate(day) > +getDate(prevState.endDate)){
+        return { endDate: day}
+      } 
+      else {
+        return { startDate: null, endDate: null}
       }
-      return { startDate: day, endDate: null };
-    });
+    })
   };
+
+  // handleDayClick = day => {
+  //   this.setState(prevState => {
+  //     const { startDate, endDate } = prevState;
+  //     const endDateDate =
+  //       endDate === null
+  //         ? null
+  //         : new Date(endDate.year, endDate.month, endDate.day);
+  //     const date = new Date(day.year, day.month, day.day);
+      
+  //     /** @todo copy logic from Google */
+  //     if (startDate === null) {
+  //       return { startDate: day };
+  //     }
+  //     if (endDateDate === null) {
+  //       return { endDate: day };
+  //     }
+  //     return { startDate: day, endDate: null };
+  //   });
+  // };
 
   close = () => {
     this.setState({ open: false });
