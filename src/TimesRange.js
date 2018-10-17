@@ -76,12 +76,19 @@ export default class TimesRange extends Component {
       else if (selectedDay < prevStartDate) {
         return { startDate: day}
       } 
-      else if (selectedDay > prevStartDate && selectedDay > prevStartDate) {
+      else if (selectedDay > prevEndDate && selectedDay > prevStartDate) {
         return { endDate: day}
       } 
       else if (selectedDay > prevEndDate){
         return { endDate: day}
       } 
+      /**
+       * @desc When a user select a time between 2 existing points 
+       * @todo Write a real logic for this one 
+       * */
+      else if(selectedDay > prevStartDate && selectedDay < prevEndDate) {
+        return { startDate: day} 
+      }
       else {
         return { startDate: null, endDate: null}
       }
