@@ -57,25 +57,29 @@ export default class TimesRange extends Component {
   handleDayClick = day => {
     this.setState(prevState => {
       const { startDate, endDate } = prevState;
+      const selectedDay = +getDate(day);
+      const prevStartDate = +getDate(prevState.startDate);
+      const prevEndDate = +getDate(prevState.endDate);
+
       if(!startDate && !endDate) {
         return { startDate: day }
       } 
-      else if(!endDate && +getDate(day) > +getDate(prevState.startDate)) {
+      else if(!endDate && selectedDay > prevStartDate) {
         return { endDate: day }
       } 
-      else if(!endDate && +getDate(day) < +getDate(prevState.startDate)) {
+      else if(!endDate && selectedDay < prevStartDate) {
         return { startDate: day, endDate: prevState.startDate }
       } 
-      else if(+getDate(day) < +getDate(prevState.startDate) && +getDate(day) < +getDate(prevState.endDate) ){
+      else if(selectedDay < prevStartDate && selectedDay < prevEndDate ){
         return {startDate: day}
       }
-      else if (+getDate(day) < +getDate(prevState.startDate)) {
+      else if (selectedDay < prevStartDate) {
         return { startDate: day}
       } 
-      else if (+getDate(day) > +getDate(prevState.startDate) && +getDate(day) > +getDate(prevState.startDate)) {
+      else if (selectedDay > prevStartDate && selectedDay > prevStartDate) {
         return { endDate: day}
       } 
-      else if (+getDate(day) > +getDate(prevState.endDate)){
+      else if (selectedDay > prevEndDate){
         return { endDate: day}
       } 
       else {
